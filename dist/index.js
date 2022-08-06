@@ -15341,7 +15341,7 @@ const setDynamicVars = () => {
 		context.ACTOR = github.context.payload.pull_request.user.login
 		context.REF = github.context.payload.pull_request.head.ref
 		context.SHA = github.context.payload.pull_request.head.sha
-		context.BRANCH = github.context.payload.pull_request.head.ref
+		context.BRANCH = github.context.payload.pull_request.head.ref_name
 		context.IS_FORK = github.context.payload.pull_request.head.repo.full_name !== context.GITHUB_REPOSITORY
 	} else {
 		context.ACTOR = github.context.actor
@@ -15365,6 +15365,7 @@ core.debug(
 )
 
 module.exports = context
+
 
 /***/ }),
 
@@ -15570,7 +15571,7 @@ const {
 	SHA,
 	USER,
 	REPOSITORY,
-	REF,
+	BRANCH,
 	TRIM_COMMIT_MESSAGE,
 	BUILD_ENV,
 	WORKING_DIRECTORY,
@@ -15606,7 +15607,7 @@ const init = () => {
 				`githubCommitMessage=${ TRIM_COMMIT_MESSAGE ? commit.commitMessage.split(/\r?\n/)[0] : commit.commitMessage }`,
 				`githubCommitOrg=${ USER }`,
 				`githubCommitRepo=${ REPOSITORY }`,
-				`githubCommitRef=${ REF }`,
+				`githubCommitRef=${ BRANCH }`,
 				`githubCommitSha=${ SHA }`,
 				`githubOrg=${ USER }`,
 				`githubRepo=${ REPOSITORY }`,
@@ -15671,6 +15672,7 @@ const init = () => {
 module.exports = {
 	init
 }
+
 
 /***/ }),
 

@@ -124,7 +124,7 @@ const setDynamicVars = () => {
 		context.ACTOR = github.context.payload.pull_request.user.login
 		context.REF = github.context.payload.pull_request.head.ref
 		context.SHA = github.context.payload.pull_request.head.sha
-		context.BRANCH = github.context.payload.pull_request.head.ref
+		context.BRANCH = github.context.payload.pull_request.head.ref_name
 		context.IS_FORK = github.context.payload.pull_request.head.repo.full_name !== context.GITHUB_REPOSITORY
 	} else {
 		context.ACTOR = github.context.actor
