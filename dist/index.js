@@ -15340,12 +15340,14 @@ const setDynamicVars = () => {
 		context.PR_NUMBER = github.context.payload.number
 		context.ACTOR = github.context.payload.pull_request.user.login
 		context.REF = github.context.payload.pull_request.head.ref
+		context.REF_NAME = github.context.payload.pull_request.head.ref_name
 		context.SHA = github.context.payload.pull_request.head.sha
 		context.BRANCH = github.context.payload.pull_request.head.ref
 		context.IS_FORK = github.context.payload.pull_request.head.repo.full_name !== context.GITHUB_REPOSITORY
 	} else {
 		context.ACTOR = github.context.actor
 		context.REF = github.context.ref
+		context.REF_NAME = github.context.ref_name
 		context.SHA = github.context.sha
 		context.BRANCH = github.context.ref.substr(11)
 	}
@@ -15365,6 +15367,7 @@ core.debug(
 )
 
 module.exports = context
+
 
 /***/ }),
 
@@ -15571,6 +15574,7 @@ const {
 	USER,
 	REPOSITORY,
 	REF,
+	REF_NAME,
 	TRIM_COMMIT_MESSAGE,
 	BUILD_ENV,
 	WORKING_DIRECTORY,
@@ -15606,7 +15610,7 @@ const init = () => {
 				`githubCommitMessage=${ TRIM_COMMIT_MESSAGE ? commit.commitMessage.split(/\r?\n/)[0] : commit.commitMessage }`,
 				`githubCommitOrg=${ USER }`,
 				`githubCommitRepo=${ REPOSITORY }`,
-				`githubCommitRef=${ REF }`,
+				`githubCommitRef=${ REF_NAME }`,
 				`githubCommitSha=${ SHA }`,
 				`githubOrg=${ USER }`,
 				`githubRepo=${ REPOSITORY }`,
@@ -15671,6 +15675,7 @@ const init = () => {
 module.exports = {
 	init
 }
+
 
 /***/ }),
 
